@@ -1,0 +1,23 @@
+import hashlib
+
+class AmriCoin:
+    def __init__(self, previous_Hash, transaction_List):
+        self.previous_Hash = previous_Hash
+        self.transaction_List = transaction_List
+        self.block_Info = "-".join(transaction_List)+"-"+previous_Hash
+        self.block_Hash = hashlib.sha256(self.block_Info.encode()).hexdigest()
+
+t1 = " eli sends 2 AC to jon"
+t2 = " j sends 4.1 AC to cat"
+t3 = " bob sends 3.2 AC to jon"
+t4 = " cat sends 0.3 AC to bob"
+
+initial_block = AmriCoin("Initial String", [t1,t2])
+
+print(initial_block.block_Info)
+print(initial_block.block_Hash)
+
+second_block = AmriCoin(initial_block.block_Hash, [t3,t4])
+
+print(second_block.block_Info)
+print(second_block.block_Hash)
